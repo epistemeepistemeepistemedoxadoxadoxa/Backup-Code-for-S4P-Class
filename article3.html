@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fascism in Modern Art and Culture - Interactive Webzine</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Consistent with work page styling */
+        body {
+            color: #ffffff;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        /* Video background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Dark overlay */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 1);
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            display: flex; /* Use flexbox to position items */
+            align-items: center; /* Vertically align items */
+            justify-content: flex-start; /* Align to the left initially */
+        }
+
+        .back-button {
+            background: none;
+            color: white;
+            border: none;
+            padding: 0;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 20px; /* Space between button and logo */
+            outline: none;
+        }
+
+        .back-button::before {
+            content: '← '; /* Add a left arrow */
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        /* Article content styling */
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 160px; /* Adjust padding to account for fixed header */
+            padding-left: 2rem;
+            padding-right: 2rem;
+            padding-bottom: 4rem;
+        }
+
+        .article-header {
+            margin-bottom: 3rem;
+            position: sticky;
+            top: 80px; /* Adjust top to be below the main header */
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 8px;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            text-align: center;
+        }
+
+        .article-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 1.5rem;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.8rem;
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            margin: 3rem 0 1.5rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid rgba(255,255,255,0.3);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .article-content ul {
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Back button */
+        .back-link {
+            display: inline-block;
+            margin-top: 4rem;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: opacity 0.3s;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            margin-top: 3rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links a {
+            color: white;
+            margin-left: 1.5rem;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .article-container {
+                padding-top: 140px; /* Adjust for smaller header */
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+                padding-bottom: 3rem;
+            }
+
+            .article-header {
+                top: 70px;
+            }
+
+            .article-header h1 {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                font-size: 1rem;
+            }
+
+            .article-content h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="Video4.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-overlay"></div>
+
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <header>
+        <button class="back-button" onclick="window.history.back();"></button>
+        <div class="logo">
+            <a href="index.html">The Show</a>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <article>
+                <h1>Nostalgic Modernism</h1>
+                <span>By Mark Fisher</span> •
+
+                <img src="Images/Retromania.jpg" alt="Retromania" class="article-image">
+
+                <p>Simon is right to observe that nostalgia was a preoccupation of literary modernism: to his examples of Proust and Nabokov we can add Joyce (Ulysses as an exercise in re-creating Dublin as it was twenty years before). The difference between literary modernism and current pop, however, is that, in the case of the former, the ‘search for lost time’ involved the invention of new formal techniques.</p>
+
+                <p>I’m not sure that Gek-Opel’s misgivings can be waved away by the claim that there is no pop futurism around at the moment (as I recall, Simon used the same argument to defend the Arctic Monkeys). Even if pop futurism is thin on the ground at the moment, there is still the whole history of innovation and novelty in pop; if contemporary pop fails by those standards, it should be judged accordingly, and hauntology is important precisely because it forces the comparison between present pop and its antecedents.</p>
+
+                <p>Gek is concerned about their being not ‘enough absence, or memories of things which never existed’ in Ghost Box in particular. I think that&nbsp; Owen’s response to this anxiety identifies that there all kinds of ‘what ifs’ at play in Ghost Box:</p>
+                <blockquote>
+                    <p>What if Thamesmead or Cumbernauld had been welcomed as modernist communities by their inhabitants, and had provided models for the rest of the country? What if the BBC Radiophonic Workshop were more important than the Beatles?</p>
+                </blockquote>
+
+                <p>My claim would be that the Radiophonic Workshop were more important than the Beatles; that the Workshop rendered even the most experimental rock obsolete even before it had happened. But of course you are not comparing like with like here; the Beatles occupied front stage in the Pop Spectacle, whereas the Radiophonic Workshop insinuated their jingles, idents, themes and special FX into the weft of everyday life. The Workshop were properly unheimlich, unhomely, fundamentally tied up with a domestic environment that had been invaded by media. Thus, nostalgia – literally, ‘homesickness’, remember – for the Radiophonic Workshop involves a craving for houses haunted by weird media.</p>
+
+                <p>I am about the same age as Julian and Jim from Ghost Box, so my nostalgia for the 70s is evidently determined in part by the fact that I was a child in that decade. Nevertheless, I think that Owen goes some way to establishing that there was something worth remembering about the end of what was misleadingly termed the ‘postwar consensus’. Looking back at the industrial unrest of the early 70s, it is hard to credit to the amount of conflict that was accepted as normal. It has been the decade and a half that has been the period of ‘consensus’ (= tyranny of capitalist-parliamentarian administration).</p>
+
+                <p>This is no licence for re-peddling the 45-79 period in pastiche packaging. But I don’t believe that Ghost Box do that. They are at their most beguiling when they foreground dyschronia – as on Belbury Poly’s ‘Caermaen’ (from The Willows) and ‘Wetland’ (from The Owl’s Map’) where folk voices summoned from beyond the grave are made to sing new songs. Dyschronia is integral to the Focus Group’s whole methodology; the joins are too audible, the samples too jagged, for their tracks to sound like simulations or refurbished artifacts.</p>
+
+                <p>In any case, Ghost Box conjure a past that never was. Their artwork fuses the look of comprehensive school text books and public service manuals with allusions to weird fiction, a fusion that has more to do with the compressions and conflations of dreamwork than with memory. At the same time, it is worth recalling that the Radiophonic Workshop were effectively public servants, that they were employed to produce a weirdpublic space.</p>
+
+                <p>The implicit demand for such a space in Ghost Box inevitably reminds us that the period since 1979 in Britain has seen the gradual but remorseless destruction of the very concept of the public. Public space has been consumed and replaced be something like the ‘third place’ exemplified by franchise coffee bars. Here, you are transported into the queasily inviting quasi-domesticated interior of one of SF Capital’s space-ships: deterritorialization (you could be anywhere) and reterritorialization (you are in surroundings whose every nuance is shinily familar). These spaces are uncanny only in their power to replicate sameness (their voracious dominance of the high street is as visually striking a sign as you could wish for of the lie that capitalism engenders competition and diversity), and the monotony of the Starbucks environment is both reassuring and oddly disorientating; inside the pod, it’s possible to literally forget what city you are in. What I have called nomadalgia is the sense of unease that these anonymous environments, more or less the same the world over, provoke; the travel sickness produced by moving through spaces that could be anywhere. The next stage will be physical spaces which resemble the interpassive consumer monads of MySpace or the IPod (Paul Morley imagines such a space in Words and Music): My, I… what happened to Our Space, or the idea of a public that was not reducible to an aggregate of consumer preferences?</p>
+
+                <p>In Ghost Box and Mordant Music, the lost concept of the public has a very palpable presence-in-absence, via samples of public service announcements. (Incidentally one connection between rave and GB/MM is the Prodigy’s sampling of thiis kind of announcement on ‘Charly’.) Public service announcements – remembered because they could often be disquieting, particularly for children – constitute a kind of reservoir of collective unconscious material. The disinterment of such broadcasts now cannot but play as the demand for a reurn of the very concept of public service. Ghost Box repeatedly invoke public bodies – through names (Belbury Poly, the Advisory Circle) and also forms (the tourist brochure, the textbook). It’s no accident that television – with its long-since dishonoured ‘public service remit’ – is crucial to both them and MM. Mordant oneirically pulp memories from different periods and media into a dreamed past. On Dead Air, 70s television is made to co-exist with rave and electro. Television and rave both stand for modes of collectivity that are either lost or dying, and their combination hints at a kind of collectivity that has never happened.</p>
+
+                <p>The public service announcement is of such importance because it is so formally similar to advertising, the most corrosive of postmodern forms. Baudrillard was right (see ‘Advertising Degree Zero’ in Simulation and Simulacra): advertising has long since exploded beyond its bounds until to consume everything else, implacably coercing all cultural processes (education as well as entertainment) into becoming adverts for themselves.</p>
+
+                <p>Confronted with capital’s intense semiotic pollution, its encrustation of the urban environment with idiotic sigils and imbecilic slogans no-one – neither the people who wrote them nor those at whom they are aimed – believes, you often wonder: what if all the effort that went into this flashy trash were devoted to a public good? If for no other reason, Ghost Box and Mordant Music are worth treasuring because they make us pose that question with renewed force.</p>
+
+                <a href="work.html" class="back-link">← Back to All Articles</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <p>&copy; Software For People</p>
+            </div>
+            <div class="footer-links">
+                <a >2025</a>
+                <a >Webzine</a>
+                <a>Spring Semester</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/cursor.js"></script>
+</body>
+</html>

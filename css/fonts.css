@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'Neue Machina UltraBold';
+    src: url('../fonts/PPNeueMachina-PlainUltrabold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neue Montreal Medium';
+    src: url('../fonts/PPNeueMontreal-Medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Reset default font family to Neue Montreal Medium */
+body, button, input, select, textarea {
+    font-family: 'Neue Montreal Medium', sans-serif;
+}
+
+/* Apply Neue Machina UltraBold to the hero heading */
+.hero-content h1 {
+    font-family: 'Neue Machina UltraBold'; /* Corrected font-family value */
+}
+
+/* Additional styling to ensure proper display */
+.hero-content h1 {
+    text-transform: lowercase; /* Match the style in the mockup */
+    letter-spacing: 0.02em;
+}
+
+/* ===== HERO SECTION ===== */
+.hero-content h1 {
+    margin-bottom: var(--spacing-lg);
+    filter: blur(1px); /* NEW: Adds 10% Gaussian blur (0.5px is approximately 10% of typical font size) */
+  }
+
+/* Example of how to apply Neue Machina UltraBold to other headings */
+h2, h3, h4, h5, h6 {
+    font-family: 'Neue Machina UltraBold';
+}

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fascism in Modern Art and Culture - Interactive Webzine</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Consistent with work page styling */
+        body {
+            color: #ffffff;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        /* Video background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Dark overlay */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 1);
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            display: flex; /* Use flexbox to position items */
+            align-items: center; /* Vertically align items */
+            justify-content: flex-start; /* Align to the left initially */
+        }
+
+        .back-button {
+            background: none;
+            color: white;
+            border: none;
+            padding: 0;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 20px; /* Space between button and logo */
+            outline: none;
+        }
+
+        .back-button::before {
+            content: '← '; /* Add a left arrow */
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        /* Article content styling */
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 160px; /* Adjust padding to account for fixed header */
+            padding-left: 2rem;
+            padding-right: 2rem;
+            padding-bottom: 4rem;
+        }
+
+        .article-header {
+            margin-bottom: 3rem;
+            position: sticky;
+            top: 80px; /* Adjust top to be below the main header */
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 8px;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            text-align: center;
+        }
+
+        .article-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 1.5rem;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.8rem;
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            margin: 3rem 0 1.5rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid rgba(255,255,255,0.3);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .article-content ul {
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Back button */
+        .back-link {
+            display: inline-block;
+            margin-top: 4rem;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: opacity 0.3s;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            margin-top: 3rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links a {
+            color: white;
+            margin-left: 1.5rem;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .article-container {
+                padding-top: 140px; /* Adjust for smaller header */
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+                padding-bottom: 3rem;
+            }
+
+            .article-header {
+                top: 70px;
+            }
+
+            .article-header h1 {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                font-size: 1rem;
+            }
+
+            .article-content h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="Video4.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="video-overlay"></div>
+
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <header>
+        <button class="back-button" onclick="window.history.back();"></button>
+        <div class="logo">
+            <a href="index.html">The Show</a>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <article>
+        <h1>The Slow Cancellation of the Future</h1>
+        <span>By Mark Fisher</span> •
+
+        <img src="Images/VR.jpg" alt="VR" class="article-image">
+        
+        
+        <p>The essential truth about art of the last thirty-five years, continually erased from consciousness by the ideology of internationalist liberalism, is that fascism didn't die with the cessation of World War II but remains the repressed collective unconsciousness of the present. In Nazi propaganda, new techniques of mass psychological or product representation (swastika, national flag, corporation logo) replaced traditional forms of representation. And, following the war, these techniques spread to corporate advertising.</p>
+        
+        
+        <p>Adorno and Horkheimer were already taking note of the concurrence between Nazi propaganda and capitalist advertising in 1944: "The Führer's voice rises from street loudspeakers to resemble the howling of sirens announcing panic—from which modern propaganda can scarcely be distinguished anyway."</p>
+        
+        
+        <p>In the Cold War against communism, advertising merged with patriotism; the subjective desires of the consumer were enlisted by the ad, coercing him or her to consume more goods "for a better life." As the product became inseparable from the advertising image, the corporate trademark, such as the florid Coca-Cola logo, functioned as a psychologically all-pervasive archetype.</p>
+        
+        
+        <p>Two influences on corporate design, evident from logos and "high-tech" graphics, were Bauhaus rationalism and fascist psychology. Bauhaus design was subsumed into corporate technology. Corporate design focuses on the trademark (or logo), a symbolic design required to "individualize" (or personalize) the corporation, so that it could acquire a friendly social identity (a "good neighbor"). But, at the same time, the trademark also suggested the universal and totalizing reach of the corporation—its efficacy in the transformation of undifferentiated Nature into progressive technology for Man.</p>
+        
+        
+        <blockquote>
+        "While the Nazi light spectacles of Albert Speer had linked electric technology with cosmic mythology to give Hitler's regime an aura of heaven-sent power, postwar corporate graphics expressed technological strength either through a neutral style of rigid formalism or through high-tech, 'space-age' luminescence inspired by Hollywood special effects."
+        </blockquote>
+        
+        
+        <p>In American art, abstract expressionism emerged after World War II as an existential revolt, the last stand of the isolated artistic "self" in a climate of conformity and increasing objectification created by mass techniques of social control. As Mark Rothko observed despondently in 1947:</p>
+        
+        
+        <blockquote>
+        "The unfriendliness of society is difficult for an artist to accept. Freed from a false sense of security and community, the artist can abandon his plastic bankbook, just as he has abandoned other forms of security. Both the sense of community and of security depend on the familiar. Free of them, transcendental experience becomes possible."
+        </blockquote>
+        
+        
+        <p>Action painting proposed a radical (self-reflexive) subjectivity stimulated by the paintings' ambiguous, nonobjective images. Jeff Wall has noted these characteristics of abstract expressionism:</p>
+        
+        
+        <blockquote>
+        "Scale and materiality are new forms of privacy... [a privacy which] is posed as a public, epic, theatrical issue; the painting becomes an 'event'... in which the destruction of the modern tradition of rhetoric is enacted. This is blown up to the heroic scale... as signifier of the 'heroism' of the 'existential' struggle... Shape is the result of the artist's enactment (theatrical re-enactment) of his relation to the primary force of being through undifferentiated gestures."
+        </blockquote>
+        
+        
+        <p>Ironically, at the same moment that abstract expressionism was evolving its oversized, abstractly subjective painting, advertising forms also made a shift toward use of the oversized billboard, the color photograph, the wide-screen film, and the picture magazine format (Life, Look)—all of which plunged the viewer inside the giant images. Like the viewer of an abstract expressionist painting, the viewer of the new publicity form inserted him- or herself into a psychologically ambiguous space where the absence of objectively signifying meaning allowed the unconscious self to project a "personal" meaning.</p>
+        
+        
+        <p>Abstract expressionism itself can be read as the dramatic projection of the artist's "self" in relation to the public. This spectacle, along with the anxiety of the artist to make a big impact (even in spite of any avowed disapproval of official culture), fed the media's need for new heroes. In 1949, Life magazine "discovered" the "New American Art" and "a new American genius" in Jackson Pollock, whose romantic-tragic life story provided a home-grown equivalent to the saga of Vincent van Gogh (as later depicted in the 1956 Hollywood movie Lust for Life).</p>
+        
+        
+        <p>In the Pop Art of the 1960s, Johns's sense of psychological terror was replaced by an ambiguous acceptance, an ironically celebratory "optimism" about the facticity of the new American consumer culture, seen as inevitable. Advertising images were depicted as neutral phenomena, the artist's "self" suppressed behind a cool, "realistic" attitude. "Outside is the world; it's there," said Roy Lichtenstein. "Pop art looks out into the world; it appears to accept its environment, which is not good or bad, but different... The heroes depicted in comic books are fascist types, but I don't take them seriously in these paintings—maybe there is a point in not taking them seriously, it's a political point. I use them for purely formal reasons, and that's not what those heroes were invented for."</p>
+        
+        
+        <p>In 1977, the American punk rock group Devo, attempting to infiltrate popular culture, came to the same conclusions as the pop artists of the sixties: "What do you think rock and roll is in America... besides Propaganda for Corporate Capitalist Life? ... Since pop music is definitely a vulgar art form connected with consumerism, the position of any artist is, in pop entertainment, really self-contempt ... We figured we'd mimic the structure of those who get the greatest rewards out of the business and become a corporation."</p>
+        
+        
+        <p>Punk rock set out to deliberately undermine liberal society's assumptions. It was designed to appear to the liberal media (at first) as (ambiguously) "fascist." For example, Poly Styrene's 1977 song, "Oh Bondage! Up Yours!" about "girls that need to chain themselves together with cuffs," was a song about a fashion. The media, however, took the song literally, seeing it as advocating bondage. By expressing disgust for, or satirically deflating, liberal society's repression of (its own) violence, punk became associated in the media with the violence it was desublimating.</p>
+        
+        
+        <p>The media accepted at face value punk's images of social violence because it wasn't neutralized by conventional forms of representation. What the media didn't see was that punk was representing the representation. As Poly Styrene put it in an interview:</p>
+        
+        
+        <blockquote>
+        "The media have always tried to associate punk with violence. But like the... violence was just a parody of violence and the papers took it seriously... When people see people wearing bondage [fashions] they think they're for bondage but they're not. Because by wearing it or singing about it, you admit you're repressed."
+        </blockquote>
+        
+        
+
+                <a href="work.html" class="back-link">← Back to All Articles</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <p>&copy; Software For People</p>
+            </div>
+            <div class="footer-links">
+                <a >2025</a>
+                <a >Webzine</a>
+                <a>Spring Semester</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/cursor.js"></script>
+</body>
+</html>

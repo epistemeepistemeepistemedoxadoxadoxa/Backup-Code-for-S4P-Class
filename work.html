@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work - Interactive Webzine</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global color scheme - black background, white text */
+        body {
+            color: #ffffff;
+            position: relative;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Video background container */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Dark overlay for better text readability */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+            z-index: -1;
+        }
+
+        /* Simplified header without navigation */
+        header {
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        /* Work page styling */
+        .page-header {
+            padding-top: 5px;
+            text-align: center;
+        }
+
+        .work-grid-full {
+            display: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .work-item {
+            border-radius: 0; /* Removed border radius */
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            position: absolute;
+            width: 498.96px; /* Increased by 20% */
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background-color: transparent;
+            padding: 0;
+        }
+
+        .work-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .work-image {
+            width: 100%;
+            height: 0;
+            padding-bottom: 67.5%; /* 16:9 aspect ratio (100/16*9) */
+            margin-bottom: 0.693rem; /* Increased by 20% */
+            border-radius: 0;
+            background-size: cover; /* Ensure the image covers the entire container */
+            background-position: center; /* Center the image within the container */
+        }
+
+        .placeholder-image {
+            width: 100%;
+            height: 0;
+             padding-bottom: 67.5%; /* 16:9 aspect ratio (100/16*9) */
+            background-color: #333333;
+            margin-bottom: 0.693rem; /* Increased by 20% */
+            border-radius: 0;
+        }
+
+        .work-info {
+            padding: 0;
+            text-align: left;
+            width: 100%;
+        }
+
+        .work-info h2 {
+            color: white;
+            font-size: 16.632px; /* Increased by 20% */
+            margin-bottom: 0.3465rem; /* Increased by 20% */
+            font-weight: normal;
+        }
+
+        .work-info p {
+            color: white;
+            font-size: 12.474px; /* Increased by 20% */
+            margin-bottom: 0;
+        }
+
+        .work-link {
+            text-decoration: none;
+            color: white;
+            display: block;
+            width: 100%;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 1.386rem; /* Increased by 20% */
+            font-weight: bold;
+        }
+
+        /* Footer styling */
+        footer {
+            padding: 2rem;
+            margin-top: 3rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 0.77616rem; /* Reduced by 30% */
+        }
+
+        .footer-links a {
+            color: white;
+            margin-left: 6.24rem; /* Increased by 20% */
+            text-decoration: none;
+            font-size: 0.77616rem; /* Reduced by 30% */
+        }
+        .footer-links a:first-child {
+            margin-left: 0;
+        }
+
+        /* Music text styling */
+        .music-text {
+            color: white;
+            font-size: 12.474px; /* Increased by 20% */
+            position: absolute;
+            cursor: pointer; /* Change cursor to indicate it's clickable */
+            text-decoration: none; /* Remove default link underline */
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="Video5.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="video-overlay"></div>
+
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <header>
+        <div class="logo">
+            <a href="index.html">The Show</a>
+        </div>
+        </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Index</h1>
+        </section>
+
+        <section class="work-grid-full">
+            <article class="work-item" id="article1">
+                <a href="article1.html" class="work-link">
+                    <div class="work-image" style="background-image: url('Images/Waves.jpg');">
+                    </div>
+                    <div class="work-info">
+                        <h2>The End Of Liberalism</h2>
+                        <p>By Dan Graham</p>
+                    </div>
+                </a>
+            </article>
+
+            <article class="work-item" id="article2">
+                <a href="article2.html" class="work-link">
+                    <div class="work-image" style="background-image: url('Images/VR.jpg');"></div>
+                    </div>
+                    <div class="work-info">
+                        <h2>The Slow Cancellation of the Future</h2>
+                        <p>By Mark Fisher</p>
+                    </div>
+                </a>
+            </article>
+
+            <article id="article3" class="work-item">
+                <a href="article3.html" class="work-link">
+                    <div class="work-image" style="background-image: url('Images/Retromania.jpg');"></div>
+                    </div>
+                    <div class="work-info">
+                        <h2>Article Title 3</h2>
+                        <p>By Author Name</p>
+                    </div>
+                </a>
+            </article>
+
+            <article class="work-item" id="article4">
+                <a href="article4.html" class="work-link">
+                    <div class="work-image" style="background-image: url('Images/Pleasures.jpg');"></div>
+                    <div class="work-info">
+                        <h2>No Longer The Pleasures</h2>
+                        <p>By Mark Fisher</p>
+                    </div>
+                </a>
+            </article>
+
+            <article class="work-item" id="article5">
+                <a href="article5.html" class="work-link">
+                    <div class="work-image" style="background-image: url('Images/Radio4.jpg');"></div>
+                    </div>
+                    <div class="work-info">
+                        <h2>Retromania</h2>
+                        <p>By Pitchfork and Simon Reynolds</p>
+                    </div>
+                </a>
+            </article>
+
+            <article class="work-item" id="article6">
+                <a href="article6.html" class="work-link">
+                    <div class="work-image" style="background-image: url('Images/Ghost.jpg');"></div>
+                    </div>
+                    <div class="work-info">
+                        <h2>Ghost Modernism</h2>
+                        <p>By Author Name</p>
+                    </div>
+                </a>
+            </article>
+
+            <a href="https://www.youtube.com/watch?v=kyxNluCh3TQ" target="_blank" class="music-text" id="music1">You Wanted a Hit?</a>
+            <a href="https://www.youtube.com/watch?v=Py3EpE4dE7s" target="_blank" class="music-text" id="music1">Rock and Roll</a>
+            <a href="https://www.youtube.com/watch?v=BQT2DfzpCLA" target="_blank" class="music-text" id="music1">Check The Rhyme</a>
+            <a href="https://www.youtube.com/watch?v=JarJYFfrQbw" target="_blank" class="music-text" id="music1">Total Entertainment Forever</a>
+            <a href="https://www.youtube.com/watch?v=fgphPFNiVZw" target="_blank" class="music-text" id="music1">Maggies Farm</a>
+            <a href="https://www.youtube.com/watch?v=RdCepOB4BV8" target="_blank" class="music-text" id="music1">For Sale?</a>
+            <a href="https://www.youtube.com/watch?v=jOGE2Ejn8GU" target="_blank" class="music-text" id="music1">Synthesizer</a>
+    
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <p>© The Machine</p>
+            </div>
+            <div class="footer-links">
+                <a href="mailto:your.email@example.com">2025</a>
+                <a href="about.html" target="_blank">About This Website</a>
+                <a href="https://twitter.com/" target="_blank">Spring Semester</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const workItems = document.querySelectorAll('.work-item');
+        const musicTexts = document.querySelectorAll('.music-text');
+        const music1Element = document.getElementById('music1');
+
+
+        // Include the music1Element in the array of floating items
+        const allFloatingItems = [...workItems, ...musicTexts, music1Element];
+
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const baseSpeed = 0.5;
+        const speedModifier = 0.5; // Reduced speed by 50%
+
+        allFloatingItems.forEach((item, index) => {
+            let x = Math.random() * windowWidth;
+            let y = Math.random() * windowHeight;
+            let dx = (Math.random() * baseSpeed + 0.1) * 2.25 * speedModifier * 1.2 * 1.5; // Increased by 50%
+            let dy = (Math.random() * baseSpeed + 0.1) * 2.25 * speedModifier * 1.2 * 1.5; // Increased by 50%
+            let animationFrameId;
+
+            item.style.left = `${x}px`;
+            item.style.top = `${y}px`;
+
+            function moveItem() {
+                x += dx;
+                y += dy;
+
+                // Check for boundaries
+                const boundaryOffset = 100; // Example offset - adjust as needed
+                if (x + item.offsetWidth > windowWidth + boundaryOffset) {
+                    x = windowWidth + boundaryOffset - item.offsetWidth;
+                    dx = -dx;
+                } else if (x < -boundaryOffset) {
+                    x = -boundaryOffset;
+                    dx = -dx;
+                }
+                if (y + item.offsetHeight > windowHeight + boundaryOffset) {
+                    y = windowHeight + boundaryOffset - item.offsetHeight;
+                    dy = -dy;
+                } else if (y < -boundaryOffset) {
+                    y = -boundaryOffset;
+                    dy = -dy;
+                }
+
+                item.style.left = `${x}px`;
+                item.style.top = `${y}px`;
+                animationFrameId = requestAnimationFrame(moveItem);
+            }
+
+            moveItem();
+        });
+    </script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/cursor.js"></script>
+</body>
+</html>

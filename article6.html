@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fascism in Modern Art and Culture - Interactive Webzine</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Consistent with work page styling */
+        body {
+            color: #ffffff;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        /* Video background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Dark overlay */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 1);
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            display: flex; /* Use flexbox to position items */
+            align-items: center; /* Vertically align items */
+            justify-content: flex-start; /* Align to the left initially */
+        }
+
+        .back-button {
+            background: none;
+            color: white;
+            border: none;
+            padding: 0;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 20px; /* Space between button and logo */
+            outline: none;
+        }
+
+        .back-button::before {
+            content: '← '; /* Add a left arrow */
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        /* Article content styling */
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 160px; /* Adjust padding to account for fixed header */
+            padding-left: 2rem;
+            padding-right: 2rem;
+            padding-bottom: 4rem;
+        }
+
+        .article-header {
+            margin-bottom: 3rem;
+            position: sticky;
+            top: 80px; /* Adjust top to be below the main header */
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 8px;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            text-align: center;
+        }
+
+        .article-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 1.5rem;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.8rem;
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            margin: 3rem 0 1.5rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid rgba(255,255,255,0.3);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .article-content ul {
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Back button */
+        .back-link {
+            display: inline-block;
+            margin-top: 4rem;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: opacity 0.3s;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            margin-top: 3rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links a {
+            color: white;
+            margin-left: 1.5rem;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .article-container {
+                padding-top: 140px; /* Adjust for smaller header */
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+                padding-bottom: 3rem;
+            }
+
+            .article-header {
+                top: 70px;
+            }
+
+            .article-header h1 {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                font-size: 1rem;
+            }
+
+            .article-content h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="Video4.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-overlay"></div>
+
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <header>
+        <button class="back-button" onclick="window.history.back();"></button>
+        <div class="logo">
+            <a href="index.html">The Show</a>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <article>
+                <h1>Ghost Modernism</h1>
+                <span>By Mark Fisher</span> •
+
+                <img src="Images/Ghost.jpg" alt="Retromania" class="article-image">
+
+                <p>“I am very lucky to be in the possession of what I at times think of as a ‘haunted’ camera,” Clean Eyes wrote to me, in response to my somewhat cursory observations on photography in the 2012/ hauntology post. “To give you some empirical info,” he continues, “I am very much an amateur, I don’t develop the work myself and to my knowledge it is only the eccentricities of the machine I use which create such occasionally uncanny results.”</p>
+                <p>Clean Eyes’ pictures of cities as construction sites have a deep resonance with Marshall Berman’s All That Is Solid That Melts Into Air, which I’m ashamed to say I read for the first time only very recently, prompted by its being used as the epigraph to Jon Savage’s Joy Division documentary. Berman’s observations on the interplay of modernism, modernity and modernization, in fact, were roughly contemporaneous with the shift into post-Fordism at the end of the 70s that Joy Division’s records converted into harrowing black and white expressionism. Berman’s own first encounter with modernization was early, and traumatic: he had seen his own neigbourhood in the Bronx literally cut in two by a cubistic expressway driven through by architect Robert Moses, whom he characterises as “the latest in a long line of titanic builders and destroyers”, including Louis XIV, Peter the Great, Stalin, Faust, Ahab, Kurtz, Citizen Kane. “For ten years, through the 1950s and early 1960s,” Berman remembered, “the center of the Bronx was pounded and blasted and smashed. My friends and I would stand on the parapet of the Grand Concourse, where 174th Street had been, and survey the work’s progress  the immense steam shovels and bulldozers and timber and steel beams, the hundreds of workers in their variously colored hard hats, the giant cranes reaching far above the Bronx’s tallest roofs, the dynamite blasts and tremors, the wild, jagged crags of rock newly torn, the vistas of devastation stretching for miles to the east and as far as the eye could see  and marvel to see our very ordinary nice neighborhood transformed into sublime, spectacular ruins.”</p>
+                <p>Yet Berman’s response to modernization – and to Moses – is valuable because of its nuance: the Moses expressway is not the sole route that modernization could take, although – in a gambit that will become characteristic of neoliberalism – it presents itself as such. To resist such developments was, its opponents were bullyingly told, to stand against modernization itself; but Berman wants to keep hold of another modernism – a modernism not of the motorway, but of the street and the public space. His account of modernism is above all an account of different streets: Baudelaire’s (and later Benjamin’s) Paris boulevards; the Nevsky Prospect in Petersburg, where Gogol’s characters wandered in a phantasmagoric haze and Dostoyevsky’s Underground Man challenged the officer, his supposed superior, and in that challenge – pathetic and hopeless as it at first sight seems – made himself and a whole hierarchical social structure suddenly visible, and hence capable of being overturned.</p>
+                <p>Berman was deeply suspicious of postmodern theory, because he thought that modernity had not been superceded. What he couldn’t quite see in 1982 – it would take Jameson and Harvey’s interventions later in the decade to demonstrate this – was the way in which the modernist expressway would lead into the cul-de-sac of postmodernism, in which perpetual instability – “they are rebuilding the city, yes always” – becomes decoupled from cultural innovation. When all that is solid melts into air, the eventual result is not the sublime decimation that Berman witnessed in the Bronx, but the lure of simulation: Dick’s reconstructed small town America and Prince Charles’ ye olde English villages lie ahead, their “timeless charm” covering over the implacable churn of the abyssal excavators always working behind the screens.</p>
+                <p>the busier you are/ the less you see</p>
+                <p>Jane Jacobs emerges in Berman’s account as an ambivalent figure. She is a corrective to Robert Moses’s Kanesianism, her delineations of “the ecology and phenomenology of the sidewalks” a woman’s-eye alternative to the Olympian planners’ gaze which conceives of people as an obstruction, as Moses did. (As Berman reconstructs it, Jacobs’ vision of the city as “a vast informal network” of shopkeepers and tradespeople, of a cycle of tiny routines, reminds me of nothing so much as Grace Jones’ “The Apple Stretching”.) At the same time, though, Berman recognised that the “undertow of nostalgia for a family and a neighborhood in which the self could be securely embedded” in Jacobs’ work make it ripe for appropriation by the New Right. Hence Jacobs’ pivotal role – alongside Jonathan Raban’s Soft City – in Harvey’s The Condition Of Postmodernitylater. Their quiet polemic against planning, their celebration of the city as a shifting dance, helps to prepare the way for a postmodernism which has photoshopped out the kind of public and popular modernism which Berman celebrated. Jacobs’ emphasis on a “feminine” city and the domestic sphere presage an ideological shift – the occlusion of the public by the family (which is resurgent at the level of ideology in part because it is shattered empirically). There’s a great deal still to be said about the way in which a certain “feminisation” of culture – the fixation on emotions, domesticity and personal grooming – has been essential to the ideological destruction of the concept of the public over the last thirty years.</p>
+                <p>So we’re back to hauntology. And Berman was already there, in 1982, when, as his book moves towards its close, he is calling up ghosts – not rural revenants, but the ghosts of past modernisms and their unfulfilled promises: he ruefully notes that, part of what was destroyed by Moses’ expressway was nothing other than older versions of modernism. In his introduction, Berman invokes Brasilia, a city, like Petersburg, built ex nihilo – but without any public squares. Once it was the dictators who sought to eliminate public space; but the destroyer of public space now, cloaked in the language of ‘choice’, ‘diversity’ and ‘interaction’, is the wireless capsule of the unpiloted OedIPod…</p>
+                <p>Wel-come to Liberty City…</p>
+
+                <a href="work.html" class="back-link">← Back to All Articles</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <p>&copy; Software For People</p>
+            </div>
+            <div class="footer-links">
+                <a >2025</a>
+                <a >Webzine</a>
+                <a>Spring Semester</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/cursor.js"></script>
+</body>
+</html>
